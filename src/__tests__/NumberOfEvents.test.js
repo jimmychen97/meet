@@ -18,4 +18,9 @@ describe('<NumberOfEvents /> component', () => {
       numberOfEvents
     );
   });
+
+  test('change number of events when input changes', () => {
+    NumberOfEventsWrapper.setState({ numberOfEvents: 32 });
+    expect(NumberOfEventsWrapper.state('numberOfEvents')).toEqual(32);
+  });
 });
