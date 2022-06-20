@@ -26,12 +26,13 @@ class App extends Component {
     this.mounted = false;
   }
 
-  updateNumberOfEvents = (numberOfEvents) => {
-    this.setState({
-      numberOfEvents,
-    });
-
-    this.updateEvents(this.state.locations, numberOfEvents);
+  updateNumberOfEvents = (eventNumbers) => {
+    this.setState(
+      {
+        numberOfEvents: eventNumbers,
+      },
+      this.updateEvents(this.state.locations, eventNumbers)
+    );
   };
 
   updateEvents = (location, eventCount) => {
