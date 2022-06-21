@@ -5,12 +5,14 @@ import CitySearch from './CitySearch';
 import NumberOfEvents from './NumberOfEvents';
 import { getEvents, extractLocations } from './api';
 import './nprogress.css';
+import { mockData } from './mock-data';
 
 class App extends Component {
   state = {
-    events: [],
+    events: mockData,
     locations: [],
     numberOfEvents: 32,
+    currentLocation: 'all',
   };
 
   componentDidMount() {
@@ -26,26 +28,31 @@ class App extends Component {
     this.mounted = false;
   }
 
-  updateNumberOfEvents = (eventNumbers) => {
-    this.setState(
+  updateNumberOfEvents = async (eventNumbers) => {
+    await this.setState(
       {
         numberOfEvents: eventNumbers,
       },
-      this.updateEvents(this.state.locations, eventNumbers)
+      this.updateEvents(this.state.currentLocation, eventNumbers)
     );
   };
 
   updateEvents = (location, eventCount) => {
+    console.log(eventCount);
     getEvents().then((events) => {
       const locationEvents =
         location === 'all'
           ? events
           : events.filter((event) => event.location === location);
-      this.setState({
-        events: locationEvents,
-        currentLocation: location,
-        numberOfEvents: eventCount,
-      });
+
+      const evts = locationEvents.slice(0, eventCount);
+      if (this.mounted) {
+        this.setState({
+          events: evts,
+          currentLocation: location,
+          numberOfEvents: eventCount,
+        });
+      }
     });
   };
 
