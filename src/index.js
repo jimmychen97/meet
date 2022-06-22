@@ -11,3 +11,5 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById('root')
 );
+
+atatus.notify(new Error('Test Atatus Setup'));
