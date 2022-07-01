@@ -6,6 +6,7 @@ import NumberOfEvents from './NumberOfEvents';
 import { getEvents, extractLocations } from './api';
 import './nprogress.css';
 import { mockData } from './mock-data';
+import { OfflineAlert } from './Alert';
 
 class App extends Component {
   state = {
@@ -13,6 +14,7 @@ class App extends Component {
     locations: [],
     numberOfEvents: 32,
     currentLocation: 'all',
+    offlineText: '',
   };
 
   componentDidMount() {
@@ -22,6 +24,16 @@ class App extends Component {
         this.setState({ events, locations: extractLocations(events) });
       }
     });
+
+    if (!navigator.onLine) {
+      this.setState({
+        offlineText: "Your're offline",
+      });
+    } else {
+      this.setState({
+        offlineText: '',
+      });
+    }
   }
 
   componentWillUnmount() {
@@ -59,6 +71,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <OfflineAlert text={OfflineAlertText} />
         <NumberOfEvents
           numberOfEvents={this.state.numberOfEvents}
           updateNumberOfEvents={this.updateNumberOfEvents}
