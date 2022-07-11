@@ -94,14 +94,17 @@ class App extends Component {
     return (
       <div className="App">
         <OfflineAlert text={this.state.offlineText} />
-        <NumberOfEvents
-          numberOfEvents={this.state.numberOfEvents}
-          updateNumberOfEvents={this.updateNumberOfEvents}
-        />
-        <CitySearch
-          locations={this.state.locations}
-          updateEvents={this.updateEvents}
-        />
+        <label className="align-left meet-title">Meet App</label>
+        <div className="align-right">
+          <NumberOfEvents
+            numberOfEvents={this.state.numberOfEvents}
+            updateNumberOfEvents={this.updateNumberOfEvents}
+          />
+          <CitySearch
+            locations={this.state.locations}
+            updateEvents={this.updateEvents}
+          />
+        </div>
 
         <div className="data-vis-wrapper">
           <EventGenre
