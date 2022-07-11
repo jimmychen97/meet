@@ -107,10 +107,6 @@ class App extends Component {
         </div>
 
         <div className="data-vis-wrapper">
-          <EventGenre
-            events={this.state.events}
-            locations={this.state.locations}
-          ></EventGenre>
           <ResponsiveContainer height={400}>
             <ScatterChart
               margin={{
@@ -132,6 +128,10 @@ class App extends Component {
               <Scatter data={this.getData()} fill="#8884d8" />
             </ScatterChart>
           </ResponsiveContainer>
+          <EventGenre
+            events={this.state.events}
+            locations={this.state.locations}
+          ></EventGenre>
         </div>
 
         <EventList events={this.state.events} />
