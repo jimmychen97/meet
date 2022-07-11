@@ -14,9 +14,10 @@ class CitySearch extends Component {
     const suggestions = this.props.locations.filter((location) => {
       return location.toUpperCase().indexOf(value.toUpperCase()) > -1;
     });
-    if (suggestions.length === 0) {
+    if (!suggestions || suggestions.length === 0) {
       this.setState({
         query: value,
+        showSuggestions: false,
         infoText:
           'We can not find the city you are looking for. Please try another city',
       });
@@ -24,8 +25,7 @@ class CitySearch extends Component {
       return this.setState({
         query: value,
         suggestions,
-        showSuggestions: false,
-        infoText: '',
+        showSuggestions: true,
       });
     }
   };
@@ -50,9 +50,9 @@ class CitySearch extends Component {
           placeholder="Search for a city"
           value={this.state.query}
           onChange={this.handleInputChanged}
-          onFocus={() => {
-            this.setState({ showSuggestions: true });
-          }}
+          // onFocus={() => {
+          //   this.setState({ showSuggestions: true });
+          // }}
         />
         <ul
           className="suggestions"
